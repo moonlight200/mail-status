@@ -28,7 +28,7 @@ apt-get update
 apt-get --just-print upgrade --assume-no >> $tmpFile
 
 echo -e "\n[Services]" >> $tmpFile
-systemctl status --all >> $tmpFile 2>&1
+netstat -tulpn >> $tmpFile 2>&1
 
 echo -e "\n[Running Processes]" >> $tmpFile
 top -bn 1 >> $tmpFile
