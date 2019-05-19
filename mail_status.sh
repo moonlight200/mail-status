@@ -1,10 +1,8 @@
 #!/bin/bash
-tmpFile=/tmp/mail_report.log
-recipient=foo@example.com
+recipient=$1
 
 # Create temporary file
-touch $tmpFile
-chmod 600 $tmpFile
+tmpFile=$(mktemp)
 
 echo "Status report created at $(date)" > $tmpFile
 
@@ -24,8 +22,8 @@ echo -e "\n[Mounted disks]" >> $tmpFile
 df -h >> $tmpFile
 
 echo -e "\n[Available updates]" >> $tmpFile
-apt-get update
-apt-get --just-print upgrade --assume-no >> $tmpFile
+apt update
+apt list --upgradable >> $tmpFile
 
 echo -e "\n[Services]" >> $tmpFile
 netstat -tulpn >> $tmpFile 2>&1
