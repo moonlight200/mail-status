@@ -22,8 +22,8 @@ echo -e "\n[Mounted disks]" >> $tmpFile
 df -h >> $tmpFile
 
 echo -e "\n[Available updates]" >> $tmpFile
-apt update
-apt list --upgradable >> $tmpFile
+apt-get -q update > /dev/null
+apt-get -q -s upgrade | grep --color=never -e "^The following packages" -e "^  " >> $tmpFile
 
 echo -e "\n[Services]" >> $tmpFile
 netstat -tulpn >> $tmpFile 2>&1
